@@ -2,7 +2,7 @@ CREATE TABLE Student
 (
     id       BIGINT AUTO_INCREMENT PRIMARY KEY,
     name     VARCHAR,
-    birthday DATE,
+    birthday DATE NOT NULL,
     "group"  INT
 );
 CREATE TABLE Subject
@@ -10,18 +10,18 @@ CREATE TABLE Subject
     id          BIGINT AUTO_INCREMENT PRIMARY KEY,
     name        VARCHAR,
     description VARCHAR,
-    grade       INT
+    grade       INT CHECK (grade >=1 AND grade <=5)
 );
 CREATE TABLE PaymentType
 (
     id   BIGINT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR
+    name VARCHAR UNIQUE
 );
 
 CREATE TABLE Payments
 (
     id           BIGINT AUTO_INCREMENT PRIMARY KEY,
-    type_id      BIGINT,
+    type_id      BIGINT NOT NULL ,
     amount       DECIMAL,
     student_id   BIGINT,
     payment_date DATETIME,
@@ -31,43 +31,43 @@ CREATE TABLE Payments
 CREATE TABLE Mark
 (
     id         BIGINT AUTO_INCREMENT PRIMARY KEY,
-    student_id BIGINT,
-    subject_id BIGINT,
-    mark       INT,
+    student_id BIGINT NOT NULL ,
+    subject_id BIGINT NOT NULL ,
+    mark       INT CHECK (mark >=1 AND mark <=10),
     FOREIGN KEY (student_id) REFERENCES Student (id),
     FOREIGN KEY (subject_id) REFERENCES Subject (id)
 );
 //grade1
-INSERT INTO Student(name)
-VALUES ('John');
-INSERT INTO Student(name)
-VALUES ('Chris');
-INSERT INTO Student(name)
-VALUES ('Carl');
+INSERT INTO Student(name, birthday)
+VALUES ('John', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Chris', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Carl', '2000-01-01');
 //grade2
-INSERT INTO Student(name)
-VALUES ('Oliver');
-INSERT INTO Student(name)
-VALUES ('James');
-INSERT INTO Student(name)
-VALUES ('Lucas');
-INSERT INTO Student(name)
-VALUES ('Henry');
+INSERT INTO Student(name, birthday)
+VALUES ('Oliver', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('James', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Lucas', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Henry', '2000-01-01');
 //grade3
-INSERT INTO Student(name)
-VALUES ('Jacob');
-INSERT INTO Student(name)
-VALUES ('Logan');
+INSERT INTO Student(name, birthday)
+VALUES ('Jacob', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Logan', '2000-01-01');
 //grade4
-INSERT INTO Student(name)
-VALUES ('Aziz');
-INSERT INTO Student(name)
-VALUES ('Jon');
+INSERT INTO Student(name, birthday)
+VALUES ('Aziz', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Jon', '2000-01-01');
 //grade5
-INSERT INTO Student(name)
-VALUES ('Lena');
-INSERT INTO Student(name)
-VALUES ('Elena');
+INSERT INTO Student(name, birthday)
+VALUES ('Lena', '2000-01-01');
+INSERT INTO Student(name, birthday)
+VALUES ('Elena', '2000-01-01');
 //subjects
 INSERT INTO Subject(name, grade)
 VALUES ('Art', 1);
